@@ -35,7 +35,7 @@ class Command(BaseCommand):
             
             populator = Faker.getPopulator()
             populator.addEntity(User,5)
-            populator.addEntity(Activity_peroid,10)
+            populator.addEntity(Activity_peroid,5)
             insertedPks = populator.execute()
             populator.execute()
             self.stdout.write(self.style.SUCCESS('Users records saved successfully.'))
