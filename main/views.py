@@ -9,6 +9,8 @@ from .models import Activity_peroid
 from .serializers import UserSerializer
 from .serializers import Activity_peroidSerializer
 
+import json
+
 class userList(APIView):
 
     def get(self, second_param):
@@ -25,24 +27,31 @@ class userList(APIView):
         #     print('id: {}    startTime: {}     endTime: {} '.format(act.id, act.startTime, act.endTime))
 
         res = []
-
+        count = 0;
         for user in users:
+            act_arr = []
+            count = 0;
             user_dict = { }
-            user_dict.id = user.id
-            user_dict.tz = user.tz
+            user_dict['id'] = user.id
+            user_dict['name'] = user.name
+            user_dict['tz'] = user.tz
             for act in acti_pe:
-                if(user.id == act.id):
+                if(user.id == act.user_id):
+                    count = count + 1;
                     # res.append({id: user.id, name: user.name, tz: user.tz, activity_period: {startTime: act.startTime, endTime: act.endTime}})
-                    act_dict = {'startTime': 1, 'endTime': 1}
-                    act_dict.startTime = act.startTime
-                    act_dict.endTime = act.endTime
-                    user_dict.activity_period = (act_dict)
+                    act_dict = {}
+                    act_dict['startTime'] = str(act.startTime)
+                    act_dict['endTime'] = str(act.endTime)
+                    act_arr.append(act_dict)
+            user_dict['activity_peroid'] = act_arr
+            print("============================")
+            print(count)
             res.append(user_dict)
 
-        print(res)
+        res = json.dumps(res)
+        res = json.loads(res)
 
-
-        return Response(serializer.data)
+        return Response(res)
 
     def post(self):
         pass

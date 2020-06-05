@@ -39,21 +39,3 @@ class Command(BaseCommand):
             insertedPks = populator.execute()
             populator.execute()
             self.stdout.write(self.style.SUCCESS('Users records saved successfully.'))
-    
-    #     size = options["number_of_user_records"]
-    #     UserRecord = []
-    #     activityRecord = []
-    #     for _ in range(size):
-    #         kwargs = {
-    #             'id' : id,
-    #             'name' : "user" + str(i),
-    #             'tz' : "place" + str(i),
-    #             'activity_peroid' :{
-    #                 'start': datetime.datetime.now(),
-    #                 'end': datetime.datetime.now() + datetime.timedelta(hours = 2)
-    #             }
-    #         }
-    #         record = User(**kwargs)
-    #         records.append(record)
-    #         id = id + 1
-    #     User.objects.bulk_create(records)
